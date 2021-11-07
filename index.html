@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>crud</title>
 </head>
 <body>
-    <h1>Ejercicio CRUD</h1>
-    <input type="text" id="userInput" value="" placeholder="ingresaTarea">
-    <input type="button" id="userButton">
-    <p id="list"></p>
+    <h1>My To Do</h1>
+    <input id="description" placeholder="Task description" type="text"/>
+<button onclick="onClick()">+</button>
+
+<ul id="list">
+</ul>
+<button onclick="taskList.removeAll()">Remove All</button>
+
    <script src="./crud.js"></script> 
 </body>
 </html>

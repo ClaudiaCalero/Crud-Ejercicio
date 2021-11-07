@@ -1,20 +1,52 @@
-let cajaTexto = document.getElementById("userInput");
-let boton = document.getElementById("userButton");
-let listaTarea = document.getElementById("list");
-let delete = document.getElementById("");
-
-class ListElement = {
-    constructor(id, text){
-        this.id = id;
-        this.text = text;
+class Task {
+    constructor(descr) {
+        this.id = Math.random() * 1000;
+        this.description = descr;
     }
 
 }
 
-function create(){
-    //let tarea = cajaTexto.value;
-    let ListElement = new ListElement(id, text); 
-    listaTarea.innerHTML += `<li>${tarea}</li> <button> delete </button>`;
+class TaskList {
+    constructor() {
+        this.list = []
+    }
+
+    addTask(task) {
+        this.list.push(task)
+        updateHtmlList()
+    }
+
+    removeTask(id) {
+        let indexToRemove = this.list.findIndex(function (element) {
+            return element.id === id;
+        })
+        this.list.splice(indexToRemove, 1);
+        updateHtmlList()
+    }
+    removeAll() {
+        //this.list.splice(0, this.list.length);
+        this.list = [];
+        updateHtmlList()
+    }
 }
 
-boton.addEventListener('click', create);
+const taskList = new TaskList();
+
+function onClick() {
+    let descr = document.getElementById('description').value;
+    let newTask = new Task(descr);
+    taskList.addTask(newTask);
+    updateHtmlList()
+}
+
+function updateHtmlList() {
+    let list = document.getElementById('list')
+    list.innerHTML = taskList.list.map(function (task) {
+        let id = task.id
+        let description = task.description
+
+        let removeButton = `<button onclick="taskList.removeTask(${id})">X</button>`
+
+        return `<li>${description} ${removeButton}</li>`;
+    }).join('');
+}
